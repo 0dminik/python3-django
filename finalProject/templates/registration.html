@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Form</title>
+      <link rel="stylesheet" href="{% static 'css/registration.css' %}">
+
+</head>
+
+<body>
+  <div class="form">
+
+      <div class="tab-content">
+          <h1>REGISTRATION</h1>
+
+          <form action="/register/" method="POST">
+          {% csrf_token %}
+            {{ new_form }}
+
+          <div class="top-row">
+            <div class="field-wrap">
+              <label>
+                First Name <span class="req">*</span>
+              </label>
+              <input name="first_name" type="text" required autocomplete="off" />
+
+            </div>
+
+            <div class="field-wrap">
+              <label>
+                Last Name<span class="req">*</span>
+              </label>
+              <input name="last_name" type="text"required autocomplete="off"/>
+            </div>
+          </div>
+
+            <div class="field-wrap">
+              <label>
+                Phone(+375 ** *******)<span class="req">*</span>
+              </label>
+              <input pattern="[0-9]{9}" name="phone" type="phone"required autocomplete="off"/>
+            </div>
+
+          <div class="field-wrap">
+            <label>
+              Email Address<span class="req">*</span>
+            </label>
+            <input name="email" type="email"required autocomplete="off"/>
+          </div>
+
+          <div class="field-wrap">
+            <label>
+              Enter A Password<span class="req">*</span>
+            </label>
+            <input name="password" type="password"required autocomplete="off"/>
+          </div>
+          <button type="submit" class="button button-block">Registration</button>
+
+          </form>
+
+        </div>
+
+      </div><!-- tab-content -->
+
+</div> <!-- /form -->
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    <script src="{% static 'js/registration.js' %}"></script>
+  <script>
+      var error = '{{ error }}';
+      if(typeof error !== 'undefined' && error !== ''){
+          alert(error + ' already exists');
+      }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,153 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Dashboard Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/vendor/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="{% static 'css/vendor/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="{% static 'js/vendor/ie8-responsive-file-warning.js' %}"></script><![endif]-->
+    <script src="{% static 'js/vendor/ie-emulation-modes-warning.js' %}"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+</head>
+<body>
+    <nav class="navbar navbar-default" id="nav-mobile">
+        <div class="container-fluid custom-menu">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Все мероприятия <span class="sr-only">(current)</span></a></li>
+                        <li><a href="#">Игра-квест</a></li>
+                        <li><a href="#">Соревнования</a></li>
+                        <li><a href="#">Кросс-кантри</a></li>
+                        <li><a href="#">Любительский марофон</a></li>
+                        <li><a href="#">Многодневка</a></li>
+                        <li><a href="#">Поисково-спасательные <p>работы</p></a></li>
+                        <li><a href="#">Мультимарофон</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="col-md-2 sidebar">
+            <img id="logo" href="/" src="{% static 'img/logo.jpg' %}" height="25px" width="173px">
+            <div>
+                <ul id="stilteksta" class="nav nav-sidebar">
+                    <li><a id="vsemero" href="#">Все мероприятия</a></li>
+                    <li><a href="#">Игра-квест</a></li>
+                    <li><a href="#">Соревнования</a></li>
+                    <li><a href="#">Кросс-кантри</a></li>
+                    <li><a href="#">Любительский марофон</a></li>
+                    <li><a href="#">Многодневка</a></li>
+                    <li><a href="#">Поисково-спасательные <p>работы</p></a></li>
+                    <li><a href="#">Мультимарофон</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-10 col-md-offset-2" id="bb-hr">
+            <div id="portal" class="col-md-10">Портал о вело-мероприятиях Беларуси</div>
+
+            <div class="col-md-2">
+              <a class="text-muted" href="{% url 'login'  %}">Вход</a>
+                <a class="text-muted" href="{% url 'registration'  %}">Регистрация</a>
+            {% if registrationView %}
+                {% endif %}
+            </div>
+        </div>
+        {% block content %}
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+              <h2>{{ all_news.0.title }}</h2>
+              <span id="marofon" class="text-muted"></span>
+              <div class="row main-block">
+                <div class="col-md-6">
+                  <img  src="{{ all_news.0.image.url }}" width="100%">
+                </div>
+                <div class="col-md-6">
+                    <p>{{ all_news.0.description }}</p>
+                    <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+                    <script src="//yastatic.net/share2/share.js"></script>
+                    <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir,gplus" data-counter=""></div>
+                </div>
+
+              </div>
+              <hr id="liniya3">
+        </div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main news-block">
+            {% for news in all_news %}
+                <div class="col-md-4  placeholder">
+                  <img class="kusokkartinki" src="{{ news.image.url }}"  class="img-responsive" alt="Generic placeholder thumbnail">
+                  <h4>{{ news.title }}</h4>
+                  <span class="text-muted">{{ news.sub_title }}</span>
+                  <p class="block1">{{ news.description }}</p>
+                  <a class="podrobno" href="{% url 'fullNews' news.id %}">Подробнее</a>
+                </div>
+            {% endfor %}
+        </div>
+        {% endblock %}
+        <footer class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="footer-inner">
+            <ul class="hor_nav">
+              <li><a id="footer_text" href="mobile">Мобильная версия</a></li>
+              <li><a id="footer_text" href="news">Рассылка новостей</a></li>
+              <li><a id="footer_text" href="rules">Правила сайта</a></li>
+              <li><a id="footer_text" href="help">Помощь клуба</a></li>
+              <li><a id="footer_text" href="maps">Карты</a></li>
+              <li><a id="footer_text" href="regions">Регионы</a></li>
+               <p>© 1999–2016 «Поехали!»</p>
+            </ul>
+
+          </div>
+        </div>
+      </div>
+    </footer>
+    </div>
+
+
+ <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+{#    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>#}
+    <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="{% static 'js/vendor/holder.min.js' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'js/vendor/ie10-viewport-bug-workaround.js' %}"></script>
+</body>
+</html>

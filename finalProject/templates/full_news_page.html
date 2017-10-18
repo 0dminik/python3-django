@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+{% block content %}
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="margin-bottom: 63px;">
+
+        <h2 >{{ new.title }}</h2>
+
+        <div class="row main-block">
+            <div class="col-md-6">
+                <div style="width: 100%">
+                    <img src="{{ new.image.url }}" width="100%">
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <p><strong>{{ new.sub_title }}</strong></p>
+            </div>
+        </div>
+        <hr id="liniya3">
+        <div >
+            <div class="row">
+                <div class="col-md-6" style="width: 100%;">
+                    <p>{{ new.description }}</p>
+                </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}
